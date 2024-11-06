@@ -31,14 +31,16 @@ async def process_help_command(message: Message):
 async def send_photo_echo(message: Message):
     await message.reply_photo(message.photo[0].file_id)
 
-@dp.message(F.voice)
 async def send_voice_echo(message: Message):
     await message.reply_voice(message.voice.file_id)
+
+dp.message.register(send_voice_echo, F.voice)
 
 @dp.message()
 async def send_echo(message: Message):
     ''' Этот хэндлер будет срабатывать на любые текстовые сообщения '''
     await message.reply(text=message.text)
+
 
 
 if __name__ == '__main__':
